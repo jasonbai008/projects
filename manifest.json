@@ -1,0 +1,17 @@
+{
+  "name": "Jason Bai's Projects",
+  "short_name": "JBai Projects",
+  "description": "Jason Bai's personal project collection",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#c9980a",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
