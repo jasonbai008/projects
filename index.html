@@ -200,7 +200,7 @@
       position: relative;
       gap: 0;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      min-width: 140px;
+      min-width: 160px;
     }
 
     .server-toggle::before {
@@ -386,7 +386,7 @@
     <!-- 服务器切换按钮 -->
     <div class="server-toggle-wrap">
       <div :class="['server-toggle', { 'is-netlify': currentServer === 'Netlify' }]">
-        <div :class="['toggle-item', { active: currentServer === 'NpDNS' }]" @click="currentServer = 'NpDNS'">NpDNS
+        <div :class="['toggle-item', { active: currentServer === 'NpDNS' }]" @click="currentServer = 'NpDNS'">Cloudflare
         </div>
         <div :class="['toggle-item', { active: currentServer === 'Netlify' }]" @click="currentServer = 'Netlify'">
           Netlify</div>
@@ -445,7 +445,7 @@
             links: [
               { name: '个人主页', npdnsUrl: 'https://jasonbai.dpdns.org', netlifyUrl: 'https://jasonbai.netlify.app', status: '' },
               { name: '个人博客', npdnsUrl: 'https://blog.jasonbai.dpdns.org', netlifyUrl: 'https://jasonbaiblog.netlify.app', status: '' },
-              { name: '作品集', npdnsUrl: 'https://projects.jasonbai.dpdns.org', netlifyUrl: 'https://jprojects.netlify.app', status: '' }
+              { name: '作品集', npdnsUrl: 'https://jprojects.pages.dev', netlifyUrl: 'https://jprojects.netlify.app', status: '' }
             ]
           },
           {
