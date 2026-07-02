@@ -1,657 +1,616 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>JasonBai · Projects</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-    <!-- PWA 配置 -->
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#c9980a" />
-    <link rel="apple-touch-icon" href="favicon.png" />
-    <style>
-      :root {
-        --bg: #f5f5f7;
-        --bg-card: #ffffff;
-        --bg-item: #f9f9fb;
-        --border: rgba(0, 0, 0, 0.07);
-        --border-h: rgba(180, 140, 0, 0.35);
-        --gold: #c9980a;
-        --gold-dim: rgba(201, 152, 10, 0.08);
-        --text: #1a1a1e;
-        --text-dim: #b0b0b4;
-        --text-mid: #6b6b7e;
-        --ok: #1a9e45;
-        --fail: #d93025;
-        --ok-glow: rgba(26, 158, 69, 0.25);
-        --fail-glow: rgba(217, 48, 37, 0.25);
-        --radius: 14px;
-        --radius-sm: 8px;
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>JasonBai · Projects</title>
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+  <!-- PWA 配置 -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#c9980a" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --bg-card: #ffffff;
+      --bg-item: #f9f9fb;
+      --border: rgba(0, 0, 0, 0.07);
+      --border-h: rgba(180, 140, 0, 0.35);
+      --gold: #c9980a;
+      --gold-dim: rgba(201, 152, 10, 0.08);
+      --text: #1a1a1e;
+      --text-dim: #969696;
+      --text-mid: #6b6b7e;
+      --ok: #1a9e45;
+      --fail: #d93025;
+      --ok-glow: rgba(26, 158, 69, 0.25);
+      --fail-glow: rgba(217, 48, 37, 0.25);
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Outfit", "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 805px;
+      margin: 0 auto;
+      padding: 60px 24px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .logo {
+      font-family: "Outfit", sans-serif;
+      font-weight: 700;
+      font-size: 52px;
+      letter-spacing: -1px;
+      color: var(--gold);
+      line-height: 1;
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+
+    .logo::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 10px auto 0;
+      opacity: 0.5;
+    }
+
+    .logo+p {
+      color: var(--text-dim);
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.07s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.14s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.21s;
+    }
+
+    .card:nth-child(5) {
+      animation-delay: 0.28s;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 3px;
+      height: 14px;
+      background: var(--gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Btn ── */
+    .btn-check {
+      font-family: "Outfit", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-mid);
+      background: var(--bg-item);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition:
+        color 0.2s,
+        border-color 0.2s,
+        background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-check:hover:not(:disabled) {
+      color: var(--gold);
+      border-color: var(--border-h);
+      background: var(--gold-dim);
+    }
+
+    .btn-check:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* ── Server Toggle ── */
+    .server-toggle-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -20px;
+      margin-bottom: 20px;
+    }
+
+    .server-toggle {
+      display: inline-flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px;
+      position: relative;
+      gap: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      min-width: 140px;
+    }
+
+    .server-toggle::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: calc(50% - 4px);
+      height: calc(100% - 8px);
+      background: var(--gold);
+      border-radius: 4px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
+    }
+
+    .server-toggle.is-netlify::before {
+      transform: translateX(100%);
+    }
+
+    .toggle-item {
+      position: relative;
+      z-index: 1;
+      padding: 4px 0;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: color 0.3s;
+      user-select: none;
+      flex: 1;
+      text-align: center;
+    }
+
+    .toggle-item.active {
+      color: #fff;
+    }
+
+    /* ── URL grid ── */
+    .url-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 10px;
+    }
+
+    .url-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-item);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      text-decoration: none;
+      transition:
+        border-color 0.2s,
+        background 0.2s,
+        transform 0.15s,
+        box-shadow 0.15s;
+    }
+
+    .url-item:hover {
+      border-color: var(--border-h);
+      background: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .url-info {
+      min-width: 0;
+    }
+
+    .url-host {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .url-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 3px;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+      transition:
+        background 0.35s,
+        box-shadow 0.35s;
+    }
+
+    .dot.ok {
+      background: var(--ok);
+      box-shadow: 0 0 8px var(--ok-glow);
+    }
+
+    .dot.fail {
+      background: var(--fail);
+      box-shadow: 0 0 8px var(--fail-glow);
+    }
+
+    .dot.checking {
+      background: var(--gold);
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.4;
       }
 
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+      50% {
+        opacity: 1;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 0 0;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
       }
 
-      html {
-        scroll-behavior: smooth;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
 
-      body {
-        font-family: "Outfit", "Noto Sans SC", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-        background-size: 60px 60px;
-        pointer-events: none;
-        z-index: 0;
-      }
-
+    @media (max-width: 600px) {
       .wrap {
-        position: relative;
-        z-index: 1;
-        max-width: 805px;
-        margin: 0 auto;
-        padding: 60px 24px 48px;
-      }
-
-      header {
-        text-align: center;
-        margin-bottom: 48px;
-        animation: fadeUp 0.6s ease both;
+        padding: 40px 16px;
       }
 
       .logo {
-        font-family: "Outfit", sans-serif;
-        font-weight: 700;
-        font-size: 52px;
-        letter-spacing: -1px;
-        color: var(--gold);
-        line-height: 1;
-        display: inline-block;
-        margin-bottom: 30px;
+        font-size: 36px;
       }
 
-      .logo::after {
-        content: "";
-        display: block;
-        width: 32px;
-        height: 3px;
-        background: var(--gold);
-        border-radius: 2px;
-        margin: 10px auto 0;
-        opacity: 0.5;
-      }
-
-      .logo + p {
-        color: var(--text-dim);
-      }
-
-      /* ── Cards ── */
-      .card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 24px;
-        margin-bottom: 16px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-        animation: fadeUp 0.6s ease both;
-      }
-
-      .card:nth-child(2) {
-        animation-delay: 0.07s;
-      }
-
-      .card:nth-child(3) {
-        animation-delay: 0.14s;
-      }
-
-      .card:nth-child(4) {
-        animation-delay: 0.21s;
-      }
-
-      .card:nth-child(5) {
-        animation-delay: 0.28s;
-      }
-
-      .card-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 18px;
-      }
-
-      .section-title {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--gold);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .section-title::before {
-        content: "";
-        width: 3px;
-        height: 14px;
-        background: var(--gold);
-        border-radius: 2px;
-        flex-shrink: 0;
-      }
-
-      /* ── Btn ── */
-      .btn-check {
-        font-family: "Outfit", sans-serif;
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--text-mid);
-        background: var(--bg-item);
-        border: 1px solid var(--border);
-        border-radius: 100px;
-        padding: 5px 14px;
-        cursor: pointer;
-        transition:
-          color 0.2s,
-          border-color 0.2s,
-          background 0.2s;
-        white-space: nowrap;
-      }
-
-      .btn-check:hover:not(:disabled) {
-        color: var(--gold);
-        border-color: var(--border-h);
-        background: var(--gold-dim);
-      }
-
-      .btn-check:disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
-      }
-
-      /* ── URL grid ── */
       .url-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-        gap: 10px;
+        grid-template-columns: 1fr;
       }
 
-      .url-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        background: var(--bg-item);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        padding: 14px 16px;
-        text-decoration: none;
-        transition:
-          border-color 0.2s,
-          background 0.2s,
-          transform 0.15s,
-          box-shadow 0.15s;
+      .dns-servers {
+        flex-direction: column;
       }
+    }
 
-      .url-item:hover {
-        border-color: var(--border-h);
-        background: #fff;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-      }
+    /* 防止 Vue 模板闪烁 */
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
 
-      .url-info {
-        min-width: 0;
-      }
+<body>
+  <div id="app" class="wrap" v-cloak>
+    <header>
+      <div class="logo">{{ header.title }}</div>
+      <p>{{ header.subtitle }}</p>
+    </header>
 
-      .url-host {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text);
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .url-label {
-        font-size: 11px;
-        color: var(--text-dim);
-        margin-top: 3px;
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(0, 0, 0, 0.1);
-        flex-shrink: 0;
-        transition:
-          background 0.35s,
-          box-shadow 0.35s;
-      }
-
-      .dot.ok {
-        background: var(--ok);
-        box-shadow: 0 0 8px var(--ok-glow);
-      }
-
-      .dot.fail {
-        background: var(--fail);
-        box-shadow: 0 0 8px var(--fail-glow);
-      }
-
-      .dot.checking {
-        background: var(--gold);
-        animation: pulse 1s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 0.4;
-        }
-
-        50% {
-          opacity: 1;
-        }
-      }
-
-      footer {
-        text-align: center;
-        padding: 32px 0 0;
-        font-size: 12px;
-        color: var(--text-dim);
-        letter-spacing: 0.03em;
-      }
-
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(12px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @media (max-width: 600px) {
-        .wrap {
-          padding: 40px 16px;
-        }
-
-        .logo {
-          font-size: 36px;
-        }
-
-        .url-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .dns-servers {
-          flex-direction: column;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="wrap">
-      <header>
-        <div class="logo">Jason Bai's Projects</div>
-        <p>40+ hand-picked personal projects, built with dedication.</p>
-      </header>
-
-      <!-- ── 社交媒体 ── -->
-      <div class="card" id="social-media">
-        <div class="card-head">
-          <div class="section-title">社交媒体</div>
-          <button class="btn-check" onclick="checkModule('social-media')">检测状态</button>
+    <!-- 服务器切换按钮 -->
+    <div class="server-toggle-wrap">
+      <div :class="['server-toggle', { 'is-netlify': currentServer === 'Netlify' }]">
+        <div :class="['toggle-item', { active: currentServer === 'NpDNS' }]" @click="currentServer = 'NpDNS'">NpDNS
         </div>
-        <div class="url-grid">
-          <a href="https://jasonbai.dpdns.org" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">个人主页</span><span class="url-label">jasonbai.dpdns.org</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://blog.jasonbai.dpdns.org" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">个人博客</span><span class="url-label">blog.jasonbai.dpdns.org</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://projects.jasonbai.dpdns.org" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">作品集</span><span class="url-label">projects.jasonbai.dpdns.org</span></div>
-            <div class="dot"></div>
-          </a>
-        </div>
+        <div :class="['toggle-item', { active: currentServer === 'Netlify' }]" @click="currentServer = 'Netlify'">
+          Netlify</div>
       </div>
-
-      <!-- ── 代码仓库 ── -->
-      <div class="card" id="repositories">
-        <div class="card-head">
-          <div class="section-title">代码仓库</div>
-          <button class="btn-check" onclick="checkModule('repositories')">检测状态</button>
-        </div>
-        <div class="url-grid">
-          <a href="https://github.com/JasonBai008" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">JasonBai008</span><span class="url-label">github.com/JasonBai008</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://github.com/JasonBai007" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">JasonBai007</span><span class="url-label">github.com/JasonBai007</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://gitee.com/lubanseven" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">LubanSeven</span><span class="url-label">gitee.com/lubanseven</span></div>
-            <div class="dot"></div>
-          </a>
-        </div>
-      </div>
-
-      <!-- ── 精选项目 ── -->
-      <div class="card" id="mod-featured">
-        <div class="card-head">
-          <div class="section-title">精选项目</div>
-          <button class="btn-check" onclick="checkModule('mod-featured')">检测状态</button>
-        </div>
-        <div class="url-grid">
-          <a href="https://easy-maker.netlify.app" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Easy Maker</span><span class="url-label">easy-maker.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>          
-          <a href="https://easy-deployer.netlify.app" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Easy Deploy</span><span class="url-label">easy-deployer.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://easy-drawer.netlify.app" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Easy Drawer</span><span class="url-label">easy-drawer.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://unpkg.com/useful-cool-js@latest/index.html" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Useful Cool JS</span><span class="url-label">unpkg.com/useful-cool-js</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://unpkg.com/lazy-man-css@latest/index.html" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Lazy Man CSS</span><span class="url-label">unpkg.com/lazy-man-css</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://zhizi.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">你问我答</span><span class="url-label">zhizi.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-mark.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">印象文档</span><span class="url-label">bai-mark.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-salary.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">工资刺客</span><span class="url-label">bai-salary.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-eyesight.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">火眼金睛</span><span class="url-label">bai-eyesight.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-ming.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">明朝那些事儿</span><span class="url-label">bai-ming.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-book.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">刘慈欣有声小说</span><span class="url-label">bai-book.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-chives.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">韭菜看盘</span><span class="url-label">bai-chives.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>          
-        </div>
-      </div>
-
-      <!-- ── 有声书 ── -->
-      <div class="card" id="mod-audiobook">
-        <div class="card-head">
-          <div class="section-title">有声书</div>
-          <button class="btn-check" onclick="checkModule('mod-audiobook')">检测状态</button>
-        </div>
-        <div class="url-grid">
-          <a href="https://jasonbai008.github.io/lightning/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">球状闪电</span><span class="url-label">jasonbai008.github.io/lightning</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://nihaixia.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">梁冬对话倪海厦</span><span class="url-label">nihaixia.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-selfhelp.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">焦虑症的自救</span><span class="url-label">bai-selfhelp.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-        </div>
-      </div>
-
-      <!-- ── 中台类 ── -->
-      <div class="card" id="mod-platform">
-        <div class="card-head">
-          <div class="section-title">中台类</div>
-          <button class="btn-check" onclick="checkModule('mod-platform')">检测状态</button>
-        </div>
-        <div class="url-grid">
-          <a href="https://bai-vue-starter.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">vue-starter</span><span class="url-label">bai-vue-starter.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://vite-vue3-starter.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">vite-vue3-starter</span><span class="url-label">vite-vue3-starter.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai007.github.io/reactSPA/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">react-spa</span><span class="url-label">jasonbai007.github.io/reactSPA</span></div>
-            <div class="dot"></div>
-          </a>
-        </div>
-      </div>
-
-      <!-- ── 工具类 ── -->
-      <div class="card" id="mod-tools">
-        <div class="card-head">
-          <div class="section-title">工具类</div>
-          <button class="btn-check" onclick="checkModule('mod-tools')">检测状态</button>
-        </div>
-        <div class="url-grid">
-          <a href="https://lottie.jasonbai.dpdns.org/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Lottie Maker</span><span class="url-label">lottie.jasonbai.dpdns.org</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-preview.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Web Viewer</span><span class="url-label">bai-preview.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai007.github.io/keeper" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Keeper</span><span class="url-label">jasonbai007.github.io/keeper</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-douyin.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">精神抖擞</span><span class="url-label">bai-douyin.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-doc.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">点滴文档</span><span class="url-label">bai-doc.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/eye-dropper" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">小鸡拾色</span><span class="url-label">jasonbai008.github.io/eye-dropper</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai007.github.io/lego" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">表单生成器</span><span class="url-label">jasonbai007.github.io/lego</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai007.github.io/json-preview" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Mock 可视化</span><span class="url-label">jasonbai007.github.io/json-preview</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/microscope" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">鼠标放大镜</span><span class="url-label">jasonbai008.github.io/microscope</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/converter/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">简繁转换器</span><span class="url-label">jasonbai008.github.io/converter</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai007.github.io/vue-have-done/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">周报记录器</span><span class="url-label">jasonbai007.github.io/vue-have-done</span></div>
-            <div class="dot"></div>
-          </a>    
-          <a href="https://feedback-me.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">留言板</span><span class="url-label">feedback-me.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>      
-        </div>
-      </div>
-
-      <!-- ── 游戏类 ── -->
-      <div class="card" id="mod-games">
-        <div class="card-head">
-          <div class="section-title">游戏类</div>
-          <button class="btn-check" onclick="checkModule('mod-games')">检测状态</button>
-        </div>
-        <div class="url-grid">
-          <a href="https://bai-eyesight.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">火眼金睛</span><span class="url-label">bai-eyesight.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-xball.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">叉烧包</span><span class="url-label">bai-xball.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://bai-birds.netlify.app/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">黄金鸟</span><span class="url-label">bai-birds.netlify.app</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://github.com/JasonBai007/suanban" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">蒜瓣葱白</span><span class="url-label">github.com/JasonBai007/suanban</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/mirror" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">镜像画板</span><span class="url-label">jasonbai008.github.io/mirror</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/writing/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">见字如面</span><span class="url-label">jasonbai008.github.io/writing</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/random/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">极限收敛</span><span class="url-label">jasonbai008.github.io/random</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/audio-v/" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">Audio V</span><span class="url-label">jasonbai008.github.io/audio-v</span></div>
-            <div class="dot"></div>
-          </a>
-          <a href="https://jasonbai008.github.io/zither" class="url-item detect-link" target="_blank">
-            <div class="url-info"><span class="url-host">夜猫牌古筝</span><span class="url-label">jasonbai008.github.io/zither</span></div>
-            <div class="dot"></div>
-          </a>
-        </div>
-      </div>
-
-      <!-- ── 小程序 ── -->
-      <div class="card" id="mod-miniprogram">
-        <div class="card-head">
-          <div class="section-title">小程序</div>
-        </div>
-        <div class="url-grid">
-          <a href="https://blog.jasonbai.dpdns.org/tech/mp1.jpg" class="url-item" target="_blank">
-            <div class="url-info"><span class="url-host">慧眼识材</span><span class="url-label">WeChat Mini Program</span></div>
-          </a>
-          <a href="https://blog.jasonbai.dpdns.org/tech/mp3.jpg" class="url-item" target="_blank">
-            <div class="url-info"><span class="url-host">颜值几何</span><span class="url-label">WeChat Mini Program</span></div>
-          </a>
-        </div>
-      </div>
-
-      <footer>© 2026–Present Jason Bai · All Rights Reserved</footer>
     </div>
 
-    <script>
-      /* URL check */
-      /**
-       * 检查指定 URL 的连通性
-       * @param {string} url - 待检查的网址
-       * @param {HTMLElement} dot - 状态指示灯元素
-       */
-      async function checkUrl(url, dot) {
-        // 1. 设置指示灯样式为“检测中”状态
-        dot.className = "dot checking";
-        // 2. 创建 AbortController 用于手动中止 fetch 请求（实现超时控制）
-        const ctrl = new AbortController();
-        // 3. 设置 6 秒超时：如果 6 秒内没有响应，则中止请求
-        const tid = setTimeout(() => ctrl.abort(), 6000);
-        try {
-          // 4. 发起 fetch 请求
-          // mode: "no-cors" 允许跨域请求但会返回一个“不透明(opaque)”的响应
-          // 这意味着你无法读取响应体、状态码或响应头，但能确认服务器是否响应
-          await fetch(url, { mode: "no-cors", signal: ctrl.signal });
-          // 5. 如果 fetch 成功完成（即使返回的是 404 或 500 错误，在 no-cors 模式下也会 resolve）
-          dot.className = "dot ok";
-        } catch {
-          // 6. 如果发生网络错误（如 DNS 解析失败、连接被拒绝）或请求被超时中止，则标记为失败
-          dot.className = "dot fail";
-        } finally {
-          // 7. 无论请求结果如何，清除定时器以释放资源
-          clearTimeout(tid);
+    <!-- 循环构建每一个模块 -->
+    <div v-for="module in modules" :key="module.id" class="card" :id="module.id">
+      <div class="card-head">
+        <div class="section-title">{{ module.title }}</div>
+        <!-- 仅在支持检测的模块显示检测按钮 -->
+        <button v-if="module.canCheck" class="btn-check" :disabled="module.checking" @click="checkModule(module)">
+          {{ module.checking ? '检测中…' : (module.checked ? '重新检测' : '检测状态') }}
+        </button>
+      </div>
+      <div class="url-grid">
+        <a v-for="(link, index) in module.links" :key="index"
+          :href="currentServer === 'NpDNS' ? link.npdnsUrl : link.netlifyUrl"
+          :class="['url-item', { 'detect-link': module.canCheck }]" target="_blank">
+          <div class="url-info">
+            <span class="url-host">{{ link.name }}</span>
+            <span class="url-label">{{ formatUrl(currentServer === 'NpDNS' ? link.npdnsUrl : link.netlifyUrl) }}</span>
+          </div>
+          <!-- 状态指示灯，仅在支持检测的模块显示 -->
+          <div v-if="module.canCheck" :class="['dot', link.status]"></div>
+        </a>
+      </div>
+    </div>
+
+    <footer>{{ footerText }}</footer>
+  </div>
+
+  <!-- 引入 Vue 2 CDN -->
+  <script src="vue.min.js"></script>
+  <script>
+    /**
+     * 页面 Vue 实例初始化
+     */
+    new Vue({
+      el: '#app',
+      data: {
+        header: {
+          title: "Jason Bai's Projects",
+          subtitle: "40+ hand-picked personal projects, built with dedication."
+        },
+        footerText: "© 2026–Present Jason Bai · All Rights Reserved",
+        currentServer: 'Netlify',
+        // 模块数据配置
+        modules: [
+          {
+            id: 'social-media',
+            title: '社交媒体',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: '个人主页', npdnsUrl: 'https://jasonbai.dpdns.org', netlifyUrl: 'https://jasonbai.netlify.app', status: '' },
+              { name: '个人博客', npdnsUrl: 'https://blog.jasonbai.dpdns.org', netlifyUrl: 'https://jasonbaiblog.netlify.app', status: '' },
+              { name: '作品集', npdnsUrl: 'https://projects.jasonbai.dpdns.org', netlifyUrl: 'https://jprojects.netlify.app', status: '' }
+            ]
+          },
+          {
+            id: 'repositories',
+            title: '代码仓库',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: 'JasonBai008', npdnsUrl: 'https://github.com/JasonBai008', netlifyUrl: 'https://github.com/JasonBai008', status: '' },
+              { name: 'JasonBai007', npdnsUrl: 'https://github.com/JasonBai007', netlifyUrl: 'https://github.com/JasonBai007', status: '' },
+              { name: 'LubanSeven', npdnsUrl: 'https://gitee.com/lubanseven', netlifyUrl: 'https://gitee.com/lubanseven', status: '' }
+            ]
+          },
+          {
+            id: 'mod-featured',
+            title: '精选项目',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: 'Easy Maker', npdnsUrl: 'https://easy-maker.netlify.app', netlifyUrl: 'https://easy-maker.netlify.app', status: '' },
+              { name: 'Easy Deploy', npdnsUrl: 'https://easy-deployer.netlify.app', netlifyUrl: 'https://easy-deployer.netlify.app', status: '' },
+              { name: 'Easy Drawer', npdnsUrl: 'https://easy-drawer.netlify.app', netlifyUrl: 'https://easy-drawer.netlify.app', status: '' },
+              { name: 'Useful Cool JS', npdnsUrl: 'https://unpkg.com/useful-cool-js@latest/index.html', netlifyUrl: 'https://unpkg.com/useful-cool-js@latest/index.html', status: '' },
+              { name: 'Lazy Man CSS', npdnsUrl: 'https://unpkg.com/lazy-man-css@latest/index.html', netlifyUrl: 'https://unpkg.com/lazy-man-css@latest/index.html', status: '' },
+              { name: '你问我答', npdnsUrl: 'https://zhizi.netlify.app/', netlifyUrl: 'https://zhizi.netlify.app/', status: '' },
+              { name: '印象文档', npdnsUrl: 'https://bai-mark.netlify.app/', netlifyUrl: 'https://bai-mark.netlify.app/', status: '' },
+              { name: '工资刺客', npdnsUrl: 'https://bai-salary.netlify.app/', netlifyUrl: 'https://bai-salary.netlify.app/', status: '' },
+              { name: '火眼金睛', npdnsUrl: 'https://bai-eyesight.netlify.app/', netlifyUrl: 'https://bai-eyesight.netlify.app/', status: '' },
+              { name: '明朝那些事儿', npdnsUrl: 'https://bai-ming.netlify.app/', netlifyUrl: 'https://bai-ming.netlify.app/', status: '' },
+              { name: '刘慈欣有声小说', npdnsUrl: 'https://bai-book.netlify.app/', netlifyUrl: 'https://bai-book.netlify.app/', status: '' },
+              { name: '韭菜看盘', npdnsUrl: 'https://bai-chives.netlify.app/', netlifyUrl: 'https://bai-chives.netlify.app/', status: '' }
+            ]
+          },
+          {
+            id: 'mod-audiobook',
+            title: '有声书',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: '球状闪电', npdnsUrl: 'https://jasonbai008.github.io/lightning/', netlifyUrl: 'https://jasonbai008.github.io/lightning/', status: '' },
+              { name: '梁冬对话倪海厦', npdnsUrl: 'https://nihaixia.netlify.app/', netlifyUrl: 'https://nihaixia.netlify.app/', status: '' },
+              { name: '焦虑症的自救', npdnsUrl: 'https://bai-selfhelp.netlify.app/', netlifyUrl: 'https://bai-selfhelp.netlify.app/', status: '' }
+            ]
+          },
+          {
+            id: 'mod-platform',
+            title: '中台类',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: 'vue-starter', npdnsUrl: 'https://bai-vue-starter.netlify.app/', netlifyUrl: 'https://bai-vue-starter.netlify.app/', status: '' },
+              { name: 'vite-vue3-starter', npdnsUrl: 'https://vite-vue3-starter.netlify.app/', netlifyUrl: 'https://vite-vue3-starter.netlify.app/', status: '' },
+              { name: 'react-spa', npdnsUrl: 'https://jasonbai007.github.io/reactSPA/', netlifyUrl: 'https://jasonbai007.github.io/reactSPA/', status: '' }
+            ]
+          },
+          {
+            id: 'mod-tools',
+            title: '工具类',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: 'Lottie Maker', npdnsUrl: 'https://lottie.jasonbai.dpdns.org/', netlifyUrl: 'https://lottie.jasonbai.dpdns.org/', status: '' },
+              { name: 'Web Viewer', npdnsUrl: 'https://bai-preview.netlify.app/', netlifyUrl: 'https://bai-preview.netlify.app/', status: '' },
+              { name: 'Keeper', npdnsUrl: 'https://jasonbai007.github.io/keeper', netlifyUrl: 'https://jasonbai007.github.io/keeper', status: '' },
+              { name: '精神抖擞', npdnsUrl: 'https://bai-douyin.netlify.app/', netlifyUrl: 'https://bai-douyin.netlify.app/', status: '' },
+              { name: '点滴文档', npdnsUrl: 'https://bai-doc.netlify.app/', netlifyUrl: 'https://bai-doc.netlify.app/', status: '' },
+              { name: '小鸡拾色', npdnsUrl: 'https://jasonbai008.github.io/eye-dropper', netlifyUrl: 'https://jasonbai008.github.io/eye-dropper', status: '' },
+              { name: '表单生成器', npdnsUrl: 'https://jasonbai007.github.io/lego', netlifyUrl: 'https://jasonbai007.github.io/lego', status: '' },
+              { name: 'Mock 可视化', npdnsUrl: 'https://jasonbai007.github.io/json-preview', netlifyUrl: 'https://jasonbai007.github.io/json-preview', status: '' },
+              { name: '鼠标放大镜', npdnsUrl: 'https://jasonbai008.github.io/microscope', netlifyUrl: 'https://jasonbai008.github.io/microscope', status: '' },
+              { name: '简繁转换器', npdnsUrl: 'https://jasonbai008.github.io/converter/', netlifyUrl: 'https://jasonbai008.github.io/converter/', status: '' },
+              { name: '周报记录器', npdnsUrl: 'https://jasonbai007.github.io/vue-have-done/', netlifyUrl: 'https://jasonbai007.github.io/vue-have-done/', status: '' },
+              { name: '留言板', npdnsUrl: 'https://feedback-me.netlify.app/', netlifyUrl: 'https://feedback-me.netlify.app/', status: '' }
+            ]
+          },
+          {
+            id: 'mod-games',
+            title: '游戏类',
+            canCheck: true,
+            checking: false,
+            checked: false,
+            links: [
+              { name: '火眼金睛', npdnsUrl: 'https://bai-eyesight.netlify.app/', netlifyUrl: 'https://bai-eyesight.netlify.app/', status: '' },
+              { name: '叉烧包', npdnsUrl: 'https://bai-xball.netlify.app/', netlifyUrl: 'https://bai-xball.netlify.app/', status: '' },
+              { name: '黄金鸟', npdnsUrl: 'https://bai-birds.netlify.app/', netlifyUrl: 'https://bai-birds.netlify.app/', status: '' },
+              { name: '蒜瓣葱白', npdnsUrl: 'https://github.com/JasonBai007/suanban', netlifyUrl: 'https://github.com/JasonBai007/suanban', status: '' },
+              { name: '镜像画板', npdnsUrl: 'https://jasonbai008.github.io/mirror', netlifyUrl: 'https://jasonbai008.github.io/mirror', status: '' },
+              { name: '见字如面', npdnsUrl: 'https://jasonbai008.github.io/writing/', netlifyUrl: 'https://jasonbai008.github.io/writing/', status: '' },
+              { name: '极限收敛', npdnsUrl: 'https://jasonbai008.github.io/random', netlifyUrl: 'https://jasonbai008.github.io/random', status: '' },
+              { name: 'Audio V', npdnsUrl: 'https://jasonbai008.github.io/audio-v', netlifyUrl: 'https://jasonbai008.github.io/audio-v', status: '' },
+              { name: '夜猫牌古筝', npdnsUrl: 'https://jasonbai008.github.io/zither', netlifyUrl: 'https://jasonbai008.github.io/zither', status: '' }
+            ]
+          },
+          {
+            id: 'mod-miniprogram',
+            title: '小程序',
+            canCheck: false,
+            links: [
+              { name: '慧眼识材', npdnsUrl: 'https://blog.jasonbai.dpdns.org/tech/mp1.jpg', netlifyUrl: 'https://blog.jasonbai.dpdns.org/tech/mp1.jpg' },
+              { name: '颜值几何', npdnsUrl: 'https://blog.jasonbai.dpdns.org/tech/mp3.jpg', netlifyUrl: 'https://blog.jasonbai.dpdns.org/tech/mp3.jpg' }
+            ]
+          }
+        ]
+      },
+      methods: {
+        /**
+         * 格式化 URL，去除 https:// 前缀
+         * @param {string} url - 原始 URL
+         * @returns {string} 格式化后的 URL
+         */
+        formatUrl(url) {
+          return url ? url.replace('https://', '') : '';
+        },
+        /**
+         * 检查单个 URL 的连通性
+         * @param {Object} link - 链接对象
+         */
+        async checkUrl(link) {
+          link.status = "checking";
+          const url = this.currentServer === 'NpDNS' ? link.npdnsUrl : link.netlifyUrl;
+          const ctrl = new AbortController();
+          const tid = setTimeout(() => ctrl.abort(), 6000);
+          try {
+            await fetch(url, { mode: "no-cors", signal: ctrl.signal });
+            link.status = "ok";
+          } catch {
+            link.status = "fail";
+          } finally {
+            clearTimeout(tid);
+          }
+        },
+        /**
+         * 检查特定模块下的所有链接
+         * @param {Object} module - 模块对象
+         */
+        async checkModule(module) {
+          module.checking = true;
+          const checkPromises = module.links.map(link => this.checkUrl(link));
+          await Promise.all(checkPromises);
+          module.checking = false;
+          module.checked = true;
+        }
+      },
+      mounted() {
+        /* PWA Service Worker 注册 */
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", () => {
+            navigator.serviceWorker
+              .register("sw.js")
+              .then((registration) => {
+                console.log("SW registered: ", registration);
+              })
+              .catch((registrationError) => {
+                console.log("SW registration failed: ", registrationError);
+              });
+          });
         }
       }
+    });
+  </script>
+</body>
 
-      /**
-       * 检查特定模块下的所有链接
-       * @param {string} id - 模块容器的 ID
-       */
-      function checkModule(id) {
-        const mod = document.getElementById(id);
-        const btn = mod.querySelector(".btn-check");
-        // 1. 禁用检测按钮并更新文本，防止重复点击
-        btn.disabled = true;
-        btn.textContent = "检测中…";
-        // 2. 查找模块内所有带有 .detect-link 类名的链接
-        const links = Array.from(mod.querySelectorAll(".detect-link"));
-        // 3. 为每个链接执行 checkUrl，并等待所有请求并行处理完成
-        Promise.all(links.map((a) => checkUrl(a.href, a.querySelector(".dot")))).then(() => {
-          // 4. 所有检测完成后，恢复按钮可用状态
-          btn.disabled = false;
-          btn.textContent = "重新检测";
-        });
-      }
-
-      /* PWA Service Worker 注册 */
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("sw.js")
-            .then((registration) => {
-              console.log("SW registered: ", registration);
-            })
-            .catch((registrationError) => {
-              console.log("SW registration failed: ", registrationError);
-            });
-        });
-      }
-    </script>
-  </body>
 </html>
