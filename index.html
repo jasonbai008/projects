@@ -216,7 +216,7 @@
       z-index: 0;
     }
 
-    .server-toggle.is-netlify::before {
+    .server-toggle.is-others::before {
       transform: translateX(100%);
     }
 
@@ -385,9 +385,9 @@
 
     <!-- 服务器切换按钮 -->
     <div class="server-toggle-wrap">
-      <div :class="['server-toggle', { 'is-netlify': currentServer === 'Netlify' }]">
-        <div :class="['toggle-item', { active: currentServer === 'Others' }]" @click="currentServer = 'Others'">Others</div>
+      <div :class="['server-toggle', { 'is-others': currentServer === 'Others' }]">
         <div :class="['toggle-item', { active: currentServer === 'Netlify' }]" @click="currentServer = 'Netlify'">Netlify</div>
+        <div :class="['toggle-item', { active: currentServer === 'Others' }]" @click="currentServer = 'Others'">Others</div>
       </div>
     </div>
 
